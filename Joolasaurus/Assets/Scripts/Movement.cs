@@ -5,20 +5,26 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
 
 	private Rigidbody2D rb;
-	private bool shouldJump;
-	private bool canJump;
 
 
 	public float speed;
 	public float jumpPower;
+	public bool isJumping;
 
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 	}
-	
-	// Update is called once per frame
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if (col.gameObject.tag == "ground") 
+		{
+			isJumping = false;
+		}
+			
+	}
 	//movement
 	void Update () {
 
@@ -28,27 +34,15 @@ public class Movement : MonoBehaviour {
 
 		Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 		rb.AddForce (movement * speed);
+	
 
-		//Jumping Key
-		if(Input.GetButtonDown("Jump"))
-		{
-			shouldJump = true;
-			canJump = false;
-		}	
+		if(Input.GetButtonDown ("Jump")){ 
+			if(isJumping == false)
+			{
+				isJumping = true;
+				rb.AddForce(Vector2.up * jumpPower);
+			}
+		}
 	}
 
-	void FixedUpdate()
-	{
-		if (shouldJump) 
-		{
-			//Jumping
-			rb.AddForce (Vector3.up * jumpPower, ForceMode2D.Impulse);
-			shouldJump = false; 
-		} 
-	}
-
-	private void OnCollisionEnter2D(Collision2D col)
-	{
-		canJump = true;
-	}
 }
