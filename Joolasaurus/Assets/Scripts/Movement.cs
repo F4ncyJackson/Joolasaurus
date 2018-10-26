@@ -4,45 +4,39 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
+
 	private Rigidbody2D rb;
 
+	public CharacterController2D controller;
+	
+	float horizontalMove = 0f;
+	bool jump = false;
 
-	public float speed;
-	public float jumpPower;
-	public bool isJumping;
+	public float runSpeed = 40f;
 
 
 	// Use this for initialization
-	void Start () {
-		rb = GetComponent<Rigidbody2D>();
-	}
 
-	void OnCollisionEnter2D(Collision2D col)
-	{
-		if (col.gameObject.tag == "ground") 
-		{
-			isJumping = false;
-		}
-			
-	}
 	//movement
 	void Update () {
 
-		//walking/running
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis("Vertical");
+		//input for moving
 
-		Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
-		rb.AddForce (movement * speed);
-	
-
-		if(Input.GetButtonDown ("Jump")){ 
-			if(isJumping == false)
-			{
-				isJumping = true;
-				rb.AddForce(Vector2.up * jumpPower);
-			}
+		horizontalMove = Input.GetAxisRaw("Horizontal")* runSpeed;
+		
+		if(Input.GetButtonDown("Jump"))
+		{
+			jump = true;
 		}
+
+	}
+
+	void FixedUpdate()
+	{
+		//move our character
+
+		controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+		jump = false;
 	}
 
 }
