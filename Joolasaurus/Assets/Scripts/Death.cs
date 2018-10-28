@@ -8,6 +8,9 @@ public class Death : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		Destroy (player);
+		if(col.gameObject.tag == "Death")
+		{
+			Destroy(player);
+		}
 	}
 }

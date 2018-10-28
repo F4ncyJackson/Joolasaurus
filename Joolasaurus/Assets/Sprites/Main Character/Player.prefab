@@ -41,6 +41,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1869122553502412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4679534092167892}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1961180705564636
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,9 +71,10 @@ GameObject:
   - component: {fileID: 58126058438953588}
   - component: {fileID: 114318142569738320}
   - component: {fileID: 114704113984685966}
+  - component: {fileID: 114241114877575778}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,6 +91,7 @@ Transform:
   m_Children:
   - {fileID: 4297426862863282}
   - {fileID: 4753731570858606}
+  - {fileID: 4679534092167892}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90,6 +107,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4134087557117466}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4679534092167892
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1869122553502412}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.099, y: 0.052, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4134087557117466}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4753731570858606
 Transform:
@@ -164,6 +194,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22253785, y: 0.18113533}
   m_EdgeRadius: 0
+--- !u!114 &114241114877575778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1961180705564636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd044a0350e5945418ef62af433555ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1392412243875860, guid: ad24057dd2006d84cb0d41ee60df7889, type: 2}
+  shootForce: 0
+  myMuzzle: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &114318142569738320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_JumpForce: 100
   m_CrouchSpeed: 0.36
-  m_MovementSmoothing: 0.05
+  m_MovementSmoothing: 0.022
   m_AirControl: 0
   m_WhatIsGround:
     serializedVersion: 2
