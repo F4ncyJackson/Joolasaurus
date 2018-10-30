@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
-		rb.AddForce(transform.forward * shootForce * Time.deltaTime);
+		rb.velocity = transform.right * shootForce;
 	}
 	
 	// Update is called once per frame
