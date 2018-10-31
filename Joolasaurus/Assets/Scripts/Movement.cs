@@ -5,38 +5,38 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
 
 
-	private Rigidbody2D rb;
-
-	public CharacterController2D controller;
+	public Rigidbody2D rb;
 	
-	float horizontalMove = 0f;
-	bool jump = false;
 
 	public float runSpeed = 40f;
 
+	[SerializeField] bool grounded = true;
+	[SerializeField] float jumpForce;
+	private Collider2D myCollider;
 
-	// Use this for initialization
-
-	//movement
-	void Update () {
-
-		//input for moving
-
-		horizontalMove = Input.GetAxisRaw("Horizontal")* runSpeed;
+	void start() 
+	{
+		rb = GetComponent<Rigidbody2D>();
 		
-		if(Input.GetButtonDown("Jump"))
+	}
+	//movement
+	void Update () 
+	{
+		if(!grounded && rb.velocity.y == 0)
 		{
-			jump = true;
+			grounded = true;
 		}
 
+		rb.velocity = new Vector2(runSpeed, rb.velocity.y);
+
+
+		if(Input.GetButtonDown("Jump"))
+		{
+			if(grounded == true)
+			{
+				rb.AddForce(transform.up*jumpForce);
+				grounded = false;
+			}
+		}
 	}
-
-	void FixedUpdate()
-	{
-		//move our character
-
-		controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-		jump = false;
-	}
-
 }
